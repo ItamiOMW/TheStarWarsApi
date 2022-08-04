@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">TheStarWarsApi</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="search_among_characters">Поиск среди персонажей…</string>
+    <string name="search_among_favorites">Поиск среди любимых…</string>
+    <string name="character_face">Character\'s face</string>
+    <string name="full_name">Полное имя: %s</string>
+    <string name="mass">Масса: %s</string>
+    <string name="height">Рост: %s</string>
+    <string name="hair_color">Цвет волос: %s</string>
+    <string name="eye_color">Цвет глаз: %s</string>
+    <string name="birth_year">Год рождения: %s</string>
+    <string name="gender">Пол: %s</string>
+    <string name="character_icon">Character icon</string>
+    <string name="add_to_favorite">Добавить в избранное</string>
+    <string name="delete_from_favorite">Удалить из избранных</string>
+    <string name="films">Фильмы с персонажем: %s</string>
+
 </resources>
