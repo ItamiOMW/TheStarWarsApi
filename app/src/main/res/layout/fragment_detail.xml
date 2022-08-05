@@ -3,23 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:orientation="vertical"
     tools:context=".presentation.detail_screen.DetailFragment">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:contentDescription="@string/character_face"
-        android:src="@mipmap/ic_launcher" />
+    <!--    No source for images in api
+    <ImageView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_weight="3"-->
+    <!--        android:contentDescription="@string/character_face"-->
+    <!--        android:src="@mipmap/ic_launcher" />-->
 
     <TextView
         android:id="@+id/tv_change_favorite"
-        android:text="@string/add_to_favorite"
         style="@style/LinearLayoutTextViewStyle"
-        android:textColor="@android:color/holo_blue_light"
+        android:layout_weight="1"
+        android:text="@string/add_to_favorite"
         android:textAlignment="center"
-        android:layout_weight="1"/>
+        android:textColor="@android:color/holo_blue_light" />
 
     <TextView
         android:id="@+id/tv_full_name"
