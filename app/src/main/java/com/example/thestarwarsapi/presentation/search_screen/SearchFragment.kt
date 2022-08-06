@@ -1,6 +1,7 @@
 package com.example.thestarwarsapi.presentation.search_screen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +65,7 @@ class SearchFragment : Fragment() {
         setupSearchView()
         observeLoading()
         viewModel.updateList(null)
-
+        Log.d("TEST_BUG", "onViewCreated")
     }
 
     private fun setupSearchView() {

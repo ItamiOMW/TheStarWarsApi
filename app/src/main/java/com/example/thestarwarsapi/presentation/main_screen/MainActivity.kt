@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.item_search -> {
                     launchFragment(SearchFragment.getInstance())
-                    it.isChecked = true
                     true
                 }
                 R.id.item_favorite -> {
