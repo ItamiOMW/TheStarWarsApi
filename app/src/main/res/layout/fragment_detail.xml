@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:orientation="vertical"
-    tools:context=".presentation.detail_screen.DetailFragment">
+    tools:context=".presentation.screens.detail_screen.DetailFragment">
 
     <!--    No source for images in api
     <ImageView-->

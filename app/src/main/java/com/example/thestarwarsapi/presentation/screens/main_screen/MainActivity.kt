@@ -1,13 +1,12 @@
-package com.example.thestarwarsapi.presentation.main_screen
+package com.example.thestarwarsapi.presentation.screens.main_screen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.thestarwarsapi.R
 import com.example.thestarwarsapi.databinding.ActivityMainBinding
-import com.example.thestarwarsapi.presentation.favorites_screen.FavoritesFragment
-import com.example.thestarwarsapi.presentation.search_screen.SearchFragment
+import com.example.thestarwarsapi.presentation.screens.favorites_screen.FavoritesFragment
+import com.example.thestarwarsapi.presentation.screens.search_screen.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 

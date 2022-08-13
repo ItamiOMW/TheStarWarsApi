@@ -1,17 +1,16 @@
-package com.example.thestarwarsapi.presentation.detail_screen
+package com.example.thestarwarsapi.presentation.screens.detail_screen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.thestarwarsapi.R
 import com.example.thestarwarsapi.StarWarsApp
 import com.example.thestarwarsapi.databinding.FragmentDetailBinding
-import com.example.thestarwarsapi.databinding.FragmentFavoritesBinding
 import com.example.thestarwarsapi.domain.model.Character
-import com.example.thestarwarsapi.presentation.favorites_screen.FavoritesViewModel
 import com.example.thestarwarsapi.presentation.viewmodel_factory.ViewModelFactory
 import javax.inject.Inject
 
@@ -64,6 +63,7 @@ class DetailFragment : Fragment() {
         viewModel.sendCharacter(character)
         setCharacterDetailInfo()
         setOnChangeFavoriteClickListener()
+        setObserverIsFavoriteChanged()
     }
 
     private fun setOnChangeFavoriteClickListener() {
@@ -78,16 +78,30 @@ class DetailFragment : Fragment() {
         }
     }
 
+    private fun setObserverIsFavoriteChanged() {
+        viewModel.isFavoriteChanged.observe(viewLifecycleOwner) {
+            if (it) {
+                Toast.makeText(requireContext(), "ADDED TO FAVORITE", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "DELETED FROM FAVORITE", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun setCharacterDetailInfo() {
         val application = requireActivity().application
         with(binding) {
-            tvFullName.text = String.format(application.getString(R.string.full_name), character.name)
+            tvFullName.text =
+                String.format(application.getString(R.string.full_name), character.name)
             tvHeight.text = String.format(application.getString(R.string.height), character.height)
             tvMass.text = String.format(application.getString(R.string.mass), character.mass)
             tvGender.text = String.format(application.getString(R.string.gender), character.gender)
-            tvBirthYear.text = String.format(application.getString(R.string.birth_year), character.birthYear)
-            tvEyeColor.text = String.format(application.getString(R.string.eye_color), character.eyeColor)
-            tvHairColor.text = String.format(application.getString(R.string.hair_color), character.hairColor)
+            tvBirthYear.text =
+                String.format(application.getString(R.string.birth_year), character.birthYear)
+            tvEyeColor.text =
+                String.format(application.getString(R.string.eye_color), character.eyeColor)
+            tvHairColor.text =
+                String.format(application.getString(R.string.hair_color), character.hairColor)
         }
 
     }

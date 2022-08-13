@@ -1,4 +1,4 @@
-package com.example.thestarwarsapi.presentation.search_screen
+package com.example.thestarwarsapi.presentation.screens.search_screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,6 +27,10 @@ class SearchViewModel @Inject constructor(
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
+    private val _isFavoriteChanged = MutableLiveData<Boolean>()
+    val isFavoriteChanged: LiveData<Boolean>
+        get() = _isFavoriteChanged
+
     fun updateList(name: String?) {
         viewModelScope.launch {
             when (name) {
@@ -38,7 +42,8 @@ class SearchViewModel @Inject constructor(
 
     fun changeFavorite(character: Character) {
         viewModelScope.launch {
-            changeUseCase.invoke(character)
+            val value = changeUseCase.invoke(character)
+            _isFavoriteChanged.value = value
         }
     }
 

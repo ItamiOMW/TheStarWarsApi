@@ -1,4 +1,4 @@
-package com.example.thestarwarsapi.presentation.search_screen
+package com.example.thestarwarsapi.presentation.screens.search_screen
 
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +9,11 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.thestarwarsapi.R
 import com.example.thestarwarsapi.StarWarsApp
 import com.example.thestarwarsapi.databinding.FragmentSearchBinding
 import com.example.thestarwarsapi.domain.model.Character
-import com.example.thestarwarsapi.presentation.detail_screen.DetailFragment
+import com.example.thestarwarsapi.presentation.screens.detail_screen.DetailFragment
 import com.example.thestarwarsapi.presentation.item_adapter.CharacterAdapter
 import com.example.thestarwarsapi.presentation.viewmodel_factory.ViewModelFactory
 import javax.inject.Inject
@@ -65,7 +64,17 @@ class SearchFragment : Fragment() {
         setupSearchView()
         observeLoading()
         viewModel.updateList(null)
-        Log.d("TEST_BUG", "onViewCreated")
+        setObserverIsFavoriteChanged()
+    }
+
+    private fun setObserverIsFavoriteChanged() {
+        viewModel.isFavoriteChanged.observe(viewLifecycleOwner) {
+            if (it) {
+                Toast.makeText(requireContext(), "ADDED TO FAVORITE", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "DELETED FROM FAVORITE", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setupSearchView() {
@@ -105,7 +114,6 @@ class SearchFragment : Fragment() {
             }
             onItemLongClicked = {
                 viewModel.changeFavorite(it)
-                Toast.makeText(requireContext(), "Changed", Toast.LENGTH_SHORT).show()
             }
             onReachEndListener = {
                 viewModel.increasePage()

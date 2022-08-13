@@ -1,9 +1,10 @@
-package com.example.thestarwarsapi.presentation.favorites_screen
+package com.example.thestarwarsapi.presentation.screens.favorites_screen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -11,7 +12,7 @@ import com.example.thestarwarsapi.R
 import com.example.thestarwarsapi.StarWarsApp
 import com.example.thestarwarsapi.databinding.FragmentFavoritesBinding
 import com.example.thestarwarsapi.domain.model.Character
-import com.example.thestarwarsapi.presentation.detail_screen.DetailFragment
+import com.example.thestarwarsapi.presentation.screens.detail_screen.DetailFragment
 import com.example.thestarwarsapi.presentation.item_adapter.CharacterAdapter
 import com.example.thestarwarsapi.presentation.viewmodel_factory.ViewModelFactory
 import javax.inject.Inject
@@ -56,6 +57,7 @@ class FavoritesFragment : Fragment() {
         setupRV()
         setupSearchView()
         viewModel.updateList(null)
+        setObserverIsFavoriteChanged()
     }
 
     private val mainAdapter by lazy {
@@ -72,6 +74,16 @@ class FavoritesFragment : Fragment() {
         }
         mainAdapter.onItemLongClicked = {
             viewModel.changeFavorite(it)
+        }
+    }
+
+    private fun setObserverIsFavoriteChanged() {
+        viewModel.isFavoriteChanged.observe(viewLifecycleOwner) {
+            if (it) {
+                Toast.makeText(requireContext(), "ADDED TO FAVORITE", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "DELETED FROM FAVORITE", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

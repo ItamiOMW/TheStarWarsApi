@@ -16,10 +16,16 @@ class RepositoryImpl @Inject constructor(
     private val characterDao: CharacterDao
 ) : StarRepository {
 
-    override suspend fun changeFavorite(character: Character) {
-        when (characterDao.getFavoriteByName(character.name)) {
-            null -> characterDao.insertCharacter(mapper.mapEntityToDb(character))
-            else -> characterDao.deleteFavorite(character.name)
+    override suspend fun changeFavorite(character: Character): Boolean {
+        return when (characterDao.getFavoriteByName(character.name)) {
+            null -> {
+                characterDao.insertCharacter(mapper.mapEntityToDb(character))
+                true
+            }
+            else -> {
+                characterDao.deleteFavorite(character.name)
+                false
+            }
         }
     }
 

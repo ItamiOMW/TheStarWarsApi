@@ -1,4 +1,4 @@
-package com.example.thestarwarsapi.presentation.favorites_screen
+package com.example.thestarwarsapi.presentation.screens.favorites_screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,9 +21,15 @@ class FavoritesViewModel @Inject constructor(
     val favoriteList: LiveData<List<Character>>
         get() = _favoriteList
 
+    private val _isFavoriteChanged = MutableLiveData<Boolean>()
+    val isFavoriteChanged: LiveData<Boolean>
+        get() = _isFavoriteChanged
+
+
     fun changeFavorite(character: Character) {
         viewModelScope.launch {
-            changeFavoriteUseCase.invoke(character)
+            val value = changeFavoriteUseCase.invoke(character)
+            _isFavoriteChanged.value = value
             updateList(null)
         }
     }

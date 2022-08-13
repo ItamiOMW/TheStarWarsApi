@@ -1,4 +1,4 @@
-package com.example.thestarwarsapi.presentation.detail_screen
+package com.example.thestarwarsapi.presentation.screens.detail_screen
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.thestarwarsapi.R
 import com.example.thestarwarsapi.domain.model.Character
 import com.example.thestarwarsapi.domain.usecases.ChangeFavoriteUseCase
-import com.example.thestarwarsapi.domain.usecases.GetAllFavoritesUseCase
-import com.example.thestarwarsapi.domain.usecases.SearchCharacterUseCase
 import com.example.thestarwarsapi.domain.usecases.SearchFavoriteUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,6 +24,11 @@ class DetailViewModel @Inject constructor(
     val isFavoriteText: LiveData<String>
         get() = _isFavoriteText
 
+    private val _isFavoriteChanged = MutableLiveData<Boolean>()
+    val isFavoriteChanged: LiveData<Boolean>
+        get() = _isFavoriteChanged
+
+
     fun sendCharacter(character: Character) {
         this.character = character
         setIsFavoriteText()
@@ -33,7 +36,8 @@ class DetailViewModel @Inject constructor(
 
     fun changeFavorite() {
         viewModelScope.launch {
-            changeFavoriteUseCase.invoke(character)
+            val value = changeFavoriteUseCase.invoke(character)
+            _isFavoriteChanged.value = value
             setIsFavoriteText()
         }
     }

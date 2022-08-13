@@ -1,13 +1,11 @@
 package com.example.thestarwarsapi.di
 
 import androidx.lifecycle.ViewModel
-import com.example.thestarwarsapi.presentation.detail_screen.DetailViewModel
-import com.example.thestarwarsapi.presentation.favorites_screen.FavoritesViewModel
-import com.example.thestarwarsapi.presentation.search_screen.SearchViewModel
+import com.example.thestarwarsapi.presentation.screens.detail_screen.DetailViewModel
+import com.example.thestarwarsapi.presentation.screens.favorites_screen.FavoritesViewModel
+import com.example.thestarwarsapi.presentation.screens.search_screen.SearchViewModel
 import dagger.Binds
-import dagger.MapKey
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoMap
 
 @Module
