@@ -1,12 +1,16 @@
-#STACK:
+# STACK:
 
-###- DAGGER
+### - DAGGER
 
-###- RETROFIT
-###- ROOM DATABASE
-###- COROUTINES
-###- MVVM
-###- VIEW BINDING
+### - RETROFIT
+
+### - ROOM DATABASE
+
+### - COROUTINES
+
+### - MVVM
+
+### - VIEW BINDING
 
 #####This APP works with Star Wars API ([DOCUMENTATION](https://swapi.dev/documentation))
 
