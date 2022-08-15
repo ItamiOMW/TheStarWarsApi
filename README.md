@@ -1,12 +1,15 @@
-#Heading 1 STACK:
-#Heading 3 - DAGGER, 
-#Heading 3 - RETROFIT, 
-#Heading 3 - ROOM DATABASE,
-#Heading 3 - COROUTINES,
-#Heading 3 - MVVM, 
-#Heading 3 - VIEW BINDING
+#STACK:
 
-#Heading 5 This APP works with Star Wars API ([DOCUMENTATION](https://swapi.dev/documentation))
+###- DAGGER
+
+###- RETROFIT
+###- ROOM DATABASE
+###- COROUTINES
+###- MVVM
+###- VIEW BINDING
+
+#####This APP works with Star Wars API ([DOCUMENTATION](https://swapi.dev/documentation))
+
 #Heading 1 APPLICATION FEATURES:
 - SEE ALL THE AVAILABLE CHARACTERS
 - SEARCH CHARACTERS FROM STAR WARS UNIVERSE
