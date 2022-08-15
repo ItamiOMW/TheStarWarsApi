@@ -12,9 +12,10 @@
 
 ### - VIEW BINDING
 
-#####This APP works with Star Wars API ([DOCUMENTATION](https://swapi.dev/documentation))
 
-#Heading 1 APPLICATION FEATURES:
+
+This APP works with Star Wars API ([DOCUMENTATION](https://swapi.dev/documentation))
+# APPLICATION FEATURES:
 - SEE ALL THE AVAILABLE CHARACTERS
 - SEARCH CHARACTERS FROM STAR WARS UNIVERSE
 - CHECK CHARACTER DETAIL INFO(WEIGHT, HEIGHT...)
