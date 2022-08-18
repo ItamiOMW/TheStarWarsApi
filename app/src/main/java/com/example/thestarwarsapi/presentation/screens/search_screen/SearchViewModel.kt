@@ -8,7 +8,9 @@ import com.example.thestarwarsapi.domain.model.Character
 import com.example.thestarwarsapi.domain.usecases.ChangeFavoriteUseCase
 import com.example.thestarwarsapi.domain.usecases.GetAllCharactersUseCase
 import com.example.thestarwarsapi.domain.usecases.SearchCharacterUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
@@ -17,7 +19,7 @@ class SearchViewModel @Inject constructor(
     private val changeUseCase: ChangeFavoriteUseCase
 ) : ViewModel() {
 
-    private var page = 1
+    private var page = 0
 
     private val _listCharacters = MutableLiveData<List<Character>>()
     val listCharacters: LiveData<List<Character>>
@@ -42,20 +44,23 @@ class SearchViewModel @Inject constructor(
 
     fun changeFavorite(character: Character) {
         viewModelScope.launch {
-            val value = changeUseCase.invoke(character)
-            _isFavoriteChanged.value = value
+            withContext(Dispatchers.IO) {
+                val value = changeUseCase.invoke(character)
+                _isFavoriteChanged.postValue(value)
+            }
         }
     }
 
     fun increasePage() {
-        page += 1
         getCharacters()
     }
 
     private fun search(name: String) {
-        viewModelScope.launch {
+        viewModelScope.launch() {
             _isLoading.value = true
-            _listCharacters.value = searchUseCase.invoke(name)
+            withContext(Dispatchers.IO) {
+                _listCharacters.postValue(searchUseCase.invoke(name))
+            }
             _isLoading.value = false
         }
     }
@@ -65,7 +70,9 @@ class SearchViewModel @Inject constructor(
             _isLoading.value = true
             val mutableList = mutableListOf<Character>()
             _listCharacters.value?.toMutableList()?.let { mutableList.addAll(it) }
-            getAllCharactersUseCase.invoke(page)?.let { mutableList.addAll(it) }
+            withContext(Dispatchers.IO) {
+                getAllCharactersUseCase.invoke(++page)?.let { mutableList.addAll(it) }
+            }
             _listCharacters.value = mutableList.toList()
             _isLoading.value = false
         }
