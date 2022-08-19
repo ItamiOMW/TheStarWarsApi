@@ -60,10 +60,10 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
-        setupRV()
-        setupSearchView()
-        observeLoading()
         viewModel.updateList(null)
+        setupRV()
+        observeLoading()
+        setupSearchView()
         setObserverIsFavoriteChanged()
     }
 
@@ -82,6 +82,7 @@ class SearchFragment : Fragment() {
             clearFocus()
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
+                    viewModel.updateList(query)
                     return false
                 }
 
@@ -106,6 +107,7 @@ class SearchFragment : Fragment() {
     private fun setupRV() {
         binding.rvCharacters.adapter = mainAdapter
         viewModel.listCharacters.observe(viewLifecycleOwner) {
+            Log.d("FIX_BUG", it.size.toString())
             mainAdapter.submitList(it)
         }
         with(mainAdapter) {

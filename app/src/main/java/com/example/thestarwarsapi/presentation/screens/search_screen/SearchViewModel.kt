@@ -34,6 +34,7 @@ class SearchViewModel @Inject constructor(
         get() = _isFavoriteChanged
 
     fun updateList(name: String?) {
+        page = 1
         viewModelScope.launch {
             when (name) {
                 null -> getCharacters()
@@ -52,6 +53,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun increasePage() {
+        page += 1
         getCharacters()
     }
 
@@ -71,7 +73,7 @@ class SearchViewModel @Inject constructor(
             val mutableList = mutableListOf<Character>()
             _listCharacters.value?.toMutableList()?.let { mutableList.addAll(it) }
             withContext(Dispatchers.IO) {
-                getAllCharactersUseCase.invoke(++page)?.let { mutableList.addAll(it) }
+                getAllCharactersUseCase.invoke(page)?.let { mutableList.addAll(it) }
             }
             _listCharacters.value = mutableList.toList()
             _isLoading.value = false
